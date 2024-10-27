@@ -25,7 +25,7 @@
 (print (test 1))
 ```
 defunをdefにしたり、代入にもsetfじゃなく=を用いたりしています。
-また、condやlet(discoではwith)の余計なカッコを省いたりしています。
+また、condやlet(discoではwith)の余計なカッコを省いてます。
 *つまりポールグレアムさんのArcをめっちゃ真似てます。
 
 ### スタック式VM
