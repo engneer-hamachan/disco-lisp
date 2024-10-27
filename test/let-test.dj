@@ -1,0 +1,47 @@
+(load "test/assert.dj")
+
+(with (x 1)
+  (def hoge () 
+    (print 'hoge)))
+
+(with (x 1)
+  (def test () 
+    (print (= x (+ x 10))))
+  (= x (+ x 100))
+  (aeq 101 (print x) "let11")
+  (aeq 111 (test) "let12")
+  (aeq 121 (test) "let13")
+  (print x))
+
+(aeq 'hoge (hoge) "let16")
+
+(aeq 131 (test) "let19")
+(aeq 141 (print (test)) "let20")
+(aeq 151 (test) "let23")
+(aeq 161 (print (test)) "let24")
+(aeq 171 (test) "let27")
+(aeq 181 (print (test)) "let28")
+
+(with (x 1)
+  (def test (x) 
+    (print (= x (+ x 10))))
+  (aeq 20 (test 10) "let28")
+  (aeq 20 (test 10) "let29")
+  (aeq 101 (= x (+ x 100)) "let30"))
+
+(aeq 30 (test 20) "let32")
+(aeq 40 (test 30) "let33")
+(aeq 50 (test 40) "let34")
+
+(with (x 0)
+  (def up () 
+    (print (= x (+ x 10))))
+  (def down () 
+    (print (= x (- x 10)))))
+
+(aeq 10 (up) "let42")
+(aeq 20 (up) "let43")
+(aeq 30 (up) "let44")
+(aeq 20 (down) "let45")
+(aeq 10 (down) "let46")
+(aeq 0 (down) "let47")

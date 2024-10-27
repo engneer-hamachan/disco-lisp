@@ -1,0 +1,67 @@
+(load "examples/hab/util.dj")
+
+(global *hab-cmd* (make-hash))
+
+(def empty-string (s)
+  (if (< (length s) 1)
+    t
+    nil))
+
+(def cmd-option (s)
+  (cond (not (str? s)) nil
+        (< (length s) 2) nil
+        (eq? (subseq s 0 1) "-") s
+        t nil))
+
+(def make-option-sym (s)
+  (intern (subseq s 1 100)))
+
+(def cmd-option-value (s)
+  (cond (cmd-option s) nil
+        (empty-string s) nil
+        t s))
+
+(def set-options (args table)
+  (if (eq? (car args) nil)
+    table
+    (progn
+      (aif (cmd-option (car args))
+        (table (make-option-sym &it) 
+               (aif (cmd-option-value (cadr args)) &it t)))
+      (set-options (cdr args) table))))
+
+(def make-option-hash (args)
+  (set-options args (make-hash)))
+
+(def make-hab-options (args)
+  (global *hab-options* (make-option-hash args)))
+
+(def get-hab-option (sym)
+  (*hab-options* sym))
+
+(def help ()
+  (princ (format "-------------------------------------------"))
+  (princ (format "HELP"))
+  (princ (format "-------------------------------------------"))
+  (princ (format "NAME: ~a" (*hab-cmd* 'name)))
+  (princ (format "FLAGS: ~a -h (help)" (*hab-cmd* 'flags)))
+  (princ (format "USE: ~a" (*hab-cmd* 'use)))
+  (princ (format "-------------------------------------------"))
+  (princ (format "~a" (*hab-cmd* 'short)))
+  (princ (format ""))
+  (princ (format "~a" (*hab-cmd* 'long))))
+
+(mac run-hab-cmd ()
+  `(if (get-hab-option 'h)
+     (help)
+     (funcall (*hab-cmd* 'run))))
+
+(def init-hab-cmd (name flags use short long run)
+  (make-hab-options *argv*)
+  (*hab-cmd* 'name name)
+  (*hab-cmd* 'flags flags)
+  (*hab-cmd* 'use use)
+  (*hab-cmd* 'short short)
+  (*hab-cmd* 'long long)
+  (*hab-cmd* 'run run))
+

@@ -1,0 +1,10 @@
+(load "test/error-function.dj")
+
+(defun xxx () 
+  (print 1))
+
+(xxx)
+
+(setf hoge 1)
+
+(test2 hoge 22)

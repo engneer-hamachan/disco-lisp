@@ -1,0 +1,8 @@
+(def aeq (target check msg)
+  (if (eq? target check)
+    (print "ok!")
+    (progn
+      (print "aeq error")
+      (print target)
+      (print check)
+      (error msg))))

@@ -1,0 +1,66 @@
+(load "test/assert.dj")
+;(setf x 1)
+;(setf y 10)
+;(print `(,x ,y z))
+;
+;
+;(setf x 1)
+
+
+;(print "macro test")
+;
+;(defmacro m (x y)
+;  `(,x ,y))
+;
+;(m print 100)
+
+; progn 実装してから
+(mac when (test &rest body)
+  `(if ,test 
+     (progn ,@body)))
+  
+(aeq 1000 (when (eq? 1 1) (print 1000)) "macro1")
+(when (eq? 1 2) (print 10))
+(aeq 1000
+  (when (eq? 1 1) 
+   (print 20000)
+   1000)
+  "macro2")
+
+
+(mac nil! (x)
+  `(= ,x nil))
+
+(= hoge 1)
+(aeq 1 hoge "macro3")
+
+(nil! hoge)
+(aeq nil hoge "macro4")
+
+(def nil! (x)
+  (= x nil))
+
+(= hoge 1)
+(aeq 1 hoge "macro5")
+
+(nil! hoge)
+(aeq 1 hoge "macro6")
+
+(mac aif (test then else)
+ `(with (it ,test)
+     (if it ,then ,else)))
+
+(aeq 0.3333333333333333
+  (aif (/ 1.0 3)
+       it)
+  "macro7")
+
+
+(aif (eq? 1 2)
+     (print it))
+
+(aeq 'else
+  (aif (eq? 1 2)
+       (print it)
+       (print 'else))
+  "macro8")

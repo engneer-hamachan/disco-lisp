@@ -1,0 +1,17 @@
+(load "examples/hab/hab.dj")
+
+(def main ()
+  (print (*hab-options* 'o))
+  (print (*hab-options* 'a)))
+
+(* 12 1)
+(- 1 2)
+
+(init-hab-cmd "test-cmd"
+              "-o (test output1) -a (test output2)"
+              "disco main.lisp -o 111 -a fuga"
+              "short cmd caption."
+              "long cmd caption."
+              #'main)
+
+(run-hab-cmd)

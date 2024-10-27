@@ -1,0 +1,422 @@
+(def add (x y)
+  (+ x y))
+
+(def test () 1)
+
+(def test2 () "1")
+;(def test2 () 
+;  "1"
+;  (= z 1))
+
+
+(print (add (test) 2))
+;(print (add (test2) 2))
+
+
+(def plus (x y)
+  (add x y))
+
+(def plus2 (x y)
+  (add x y))
+
+(print (plus2 1 (plus 1 2)))
+;(print (plus2 1 "a"))
+
+(def appender (x y)
+  (append x y))
+
+(print (appender '(1) 2))
+;(print (appender 1 2))
+
+(car (cdr '(a)))
+;(car 'a)
+;(car 1)
+
+(car (cons '(1) 2))
+;(+ (cons '(1) 2))
+
+(- 3.0 1.2)
+;(- 3.0 "1.2")
+;(cdr (- 3.0 1.2))
+
+(def test-cdr (x)
+  (cdr x))
+
+(test-cdr '(a b c))
+;(test-cdr 1)
+
+(format "hello ~a" "Woorld")
+
+(def fmt (x y) 
+  (format "hello ~d ~a" x y))
+
+(fmt 1 "a")
+;(fmt "a" "b")
+
+(> 1 2)
+
+(def gt (x y)
+  (> x y))
+
+(gt 1 2)
+;(gt "a" 2)
+
+(command "ls" "-lha")
+;(command "ls" 1)
+
+
+(print (funcall #'gt 2 1))
+
+(def ftest (x)
+  (funcall x 2 1))
+
+;(def ftest (x)
+;  (funcall x 2 1)
+;  (error x))
+
+(ftest #'gt)
+;(ftest 1)
+
+(error "hoge")
+;(error '(1))
+
+(def err (x)
+  (error x))
+
+(err "err")
+;(err 1)
+
+
+;(+ 1 (= x 1))
+;(+ 1 (= x nil))
+
+;(+ 1 (cond t (+ 1 1)))
+;(+ 1 (cond t "a"))
+
+(length '(a b c))
+;(length 1)
+
+(def test-length (x)
+  (length x))
+
+(test-length '(a b c))
+;(test-length 1)
+
+(zero? 0)
+;(zerop "0")
+
+(def test-zero (x)
+  (zero? x))
+
+(test-zero 1)
+;(test-zero "1")
+
+
+(member 'b '(a b c))
+;(member 'b "(a b c)")
+
+(% 5 3)
+;(% 5 3.0)
+
+
+(def input-form ()
+  (format "<input name='name' type='text'>"))
+
+(def index-handler () 
+  (set-status 222)
+  (format "<html><body>~a</body></html>" (input-form)))
+
+;(def index-handler () 
+;  (set-status 222.0)
+;  (format "<html><body>~a</body></html>" (input-form)))
+
+(def test-handler () 
+  (set-status 222)
+  (format "my name is ~a" (get-query 'name)))
+
+;(def test-handler (x) 
+;  (set-status 222)
+;  (format "my name is ~a" (get-query "name")))
+
+
+(defserver 'web ":8080")
+;(defserver "web" ":8080")
+;(defserver 'web 8080)
+;(defserver 'web ":8080" "hoge")
+
+(defhandler "/" #'index-handler)
+;(defhandler "/" #'index-handler "hoge")
+;(defhandler '/ (index-handler))
+(defhandler "/test" #'test-handler)
+;(defhandler "/test" "test-handler")
+(run-server web)
+
+(and 2 3)
+;(and 3)
+
+(atom? 1)
+;(atom 1 2)
+;(atom)
+
+(cons 1 2)
+;(cons 1 2 3)
+;(cons 1)
+
+(/ 3 3)
+;(/ 3)
+;(/ 3 "3")
+
+(error "error!")
+;(error 1)
+;(error)
+
+;(
+; funcall
+;  )
+
+(>= 1 2)
+;(>= (test2) 2)
+
+(> 1 2)
+;(> (test2) 2)
+
+(<= 1 2)
+;(<= (test2) 2)
+
+(list? 1)
+;(listp 1 2)
+
+(* 1 2)
+;(* "1" 2)
+
+(pair? 1)
+;(pairp 1 2)
+
+(= vec (vector 1 2 3))
+(aref 0 vec)
+;(aref 0 "vec")
+;(aref "0" vec)
+
+(random 2)
+;(random "2")
+
+(= x (fn () 1))
+
+;(print (format "~a" (funcall #'x)))
+
+(format "~a" ((fn () "1")))
+
+(with (x (fn (x) (+ x 1)))
+  (funcall #'x 1))
+
+(def test()
+  (with (x (fn (x) (+ x 1)))
+    (funcall #'x 1)))
+
+((fn (x) (+ x 1)) 1)
+
+(def test2 ()
+  ((fn () "1")))
+
+(error (test2))
+;(error (test))
+
+
+(funcall #'+ 1 2)
+(= x (fn (x y) x))
+(= x (fn (x y) 1))
+;(= x (fn (x y) "1"))
+(print (format "~d" (funcall #'x 1 2)))
+
+(print (format "~d" (funcall #'(fn (x) (+ x 1)) 1)))
+;(print (format "~a" (funcall #'(fn (x) (+ x 1)) 1)))
+(print (format "~d" (funcall #'x 1 2)))
+;(print (format "~a" (funcall #'x 1 2)))
+
+(print (format "~d" (funcall #'+ 1 2)))
+;(print (format "~a" (funcall #'+ 1 2)))
+
+(= x 1)
+;(error x)
+
+(def test () "1")
+;(def test () 1)
+(with (x (funcall #'test))
+  (error x))
+
+(with (x (funcall #'+ 1 2))
+  (format "~d" x))
+
+;(with (x (funcall #'+ 1 2))
+;  (format "~a" x))
+
+(= x (funcall #'+ 1 1))
+;(error x)
+
+(def test ()
+  (if t "1" 1))
+
+;(def test ()
+;  (if t 1 1))
+
+(= x (test))
+
+(error x)
+
+(def str () "1")
+
+(def test ()
+  (if t (str) 1))
+
+
+(with (z (if t 1 "1"))
+  (error z))
+
+(def add (x)
+  (error x))
+
+(add (test))
+
+(= x (test))
+(+ x 1)
+
+(def test ()
+  (cond nil "1" t 1))
+
+;(def test ()
+;  (cond nil "1" t '(a b c)))
+
+
+;(error (test))
+(+ 1 (test))
+
+
+
+(with (z (if t 1 "1"))
+  (error z))
+
+;(with (z (unless t 1 '(a b c)))
+;  (error z))
+
+
+(def str () "1")
+
+(def test ()
+  (if t '(a b c) 1))
+
+;(def test ()
+;  (if t (str) '(a b c)))
+
+;(def test ()
+;  (if t (str) 1))
+
+(def other-car (x)
+  (car x))
+
+(= x (test))
+(= y x)
+
+(+ y 1)
+(+ x 1)
+
+(def add (x)
+  (+ x 1))
+
+(add x)
+
+(other-car (test))
+
+
+(= z (fn () (if t "1" '(a b c))))
+;(= z (fn () (if t 1 '(a b c))))
+(error (funcall #'z))
+
+
+(error (funcall #'(fn () (if t "1" '(a b c)))))
+;(error (funcall #'(fn () (if t 1 '(a b c)))))
+
+
+(with (x (fn () (if t "1" '(a b c))))
+  (error (funcall #'x)))
+
+;(with (x (fn () (if t 1 '(a b c))))
+;  (error (funcall #'x)))
+
+
+(= z (funcall #'(fn () (if t "1" '(a b c)))))
+;(= z (funcall #'(fn () (if t 1 '(a b c)))))
+(error z)
+
+(with (x (funcall #'(fn () (if t "1" '(a b c)))))
+  (error x))
+
+;(with (x (funcall #'(fn () (if t 1 '(a b c)))))
+;  (error x))
+
+(= z (funcall #'(fn () (if t "1" '(a b c)))))
+;(= z (funcall #'(fn () (if t 1 '(a b c)))))
+(error z)
+
+(with (x (funcall #'(fn () (if t "1" '(a b c)))))
+  (error x))
+
+;(with (x (funcall #'(fn () (if t 1 '(a b c)))))
+;  (error x))
+
+(= z (if t "1" '(a b c)))
+(error z)
+
+;(= z (if t 1 '(a b c)))
+;(error z)
+
+(with (z (if t "1" '(a b c)))
+  (error z))
+
+;(with (z (if t 1 '(a b c)))
+;  (error z))
+
+(= x (case 1 (1 "1") (2 '(a b c))))
+;(= x (case 1 (1 1) (2 '(a b c))))
+
+(error x)
+
+(error (case 1 (1 "1") (2 '(a b c))))
+;(error (case 1 (1 1) (2 '(a b c))))
+
+
+(def test ()
+  (case 1 (1 "1") (2 '(a b c))))
+
+;(def test ()
+;  (case 1 (1 1) (2 '(a b c))))
+
+(error (test))
+
+(error (cond t "1" nil '(a b c)))
+;(error (cond t 1 nil '(a b c)))
+
+(= x (cond t "1" nil '(a b c)))
+;(= x (cond t 1 nil '(a b c)))
+(error x)
+
+(= x (cond t "1" nil '(a b c)))
+;(= x (cond t 1 nil '(a b c)))
+(error x)
+
+(def test ()
+  (cond t "1" nil '(a b c)))
+
+;(def test ()
+;  (cond t 1 nil '(a b c)))
+
+(error (test))
+
+(error (if t "1" '(a b c)))
+;(error (if t (vector 1 2 3) '(a b c)))
+
+(def test (x)
+  (with (y (+ x 1))
+    (+ y 1)))
+
+(test 1)
+;(test "1")

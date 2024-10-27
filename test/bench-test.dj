@@ -1,0 +1,8 @@
+(load "test/assert.dj")
+
+(def tarai (x y z)
+  (if (<= x y)
+    y
+    (tarai (tarai (- x 1) y z) (tarai (- y 1) z x) (tarai (- z 1) x y))))
+
+(time (aeq 10 (tarai 10 5 0) "bench"))

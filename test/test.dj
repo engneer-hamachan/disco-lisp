@@ -1,0 +1,376 @@
+(load "test/assert.dj")
+(load "test/idea.dj")
+(load "test/bench-test.dj")
+(load "test/let-test.dj")
+(load "test/macro-test.dj")
+
+(def x (y z)
+  (+ y z 3))
+
+(aeq 303 (x 100 200) "test7")
+
+(aeq 100
+     (if (eq? 1 1)
+       100
+       200)
+     "test12")
+
+(aeq 200
+  (if (eq? 1 2)
+    100
+    200)
+  "test:18")
+
+(def test2 (z)
+  (if (eq? z 100000)
+    z
+    (test2 (+ z 1))))
+
+;(aeq 100000 (test2 1) "test24")
+
+(= x 1111)
+(aeq 1111 x "test31")
+
+(aeq 999
+  (funcall #'(fn (x) 999) 999)
+  "test35")
+
+(aeq nil
+  (not 1)
+  "not1")
+
+(aeq t
+  (not nil)
+  "not2")
+
+(aeq 3 (and 1 2 3) "and11")
+
+(aeq nil
+  (and 1 nil 3)
+  "and2")
+
+(aeq nil
+  (and (print nil) (print 2) (print 100))
+  "and3")
+
+(aeq 1
+  (or 1 nil 3)
+  "or1")
+
+(aeq 3
+  (or nil nil 3)
+  "or2")
+
+(aeq nil
+  (or nil nil nil)
+  "or3")
+
+(aeq 2
+  (or nil (print 2) (print 100))
+  "or4")
+
+(aeq t
+  (case 1 (2 nil) (1 t))
+  "case1")
+
+(aeq 2
+  (case 1 (2 nil) (1 (+ 1 1)))
+  "case2")
+
+(aeq nil
+  (case (- 3 1) 
+    (2 nil) 
+    (1 (+ 1 1)))
+  "case3")
+
+(aeq nil
+  (case (- 3 1) 
+    (1 nil) 
+    (1 (+ 1 1)))
+  "case4")
+
+(aeq 2
+  (case (- 3 1) 
+    (1 nil) 
+    (1 (+ 1 1))
+    ('default 2))
+  "case5")
+
+(aeq 3
+  (length '(a b c))
+  "length1")
+
+(aeq nil
+     (zero? 1)
+     "zero1")
+
+(aeq t
+     (zero? 0)
+     "zero2")
+
+(aeq '(b c)
+  (member 'b '(a b c))
+  "member1")
+
+(aeq nil
+  (member 'z '(a b c))
+  "member1")
+
+(aeq 1
+  (% 5 2)
+  "remainder1")
+
+(aeq 0
+  (% 5 5)
+  "remainder2")
+
+(aeq t
+  (list? '(a))
+  "listp1")
+
+(aeq nil
+  (list? 1)
+  "listp2")
+
+(aeq nil
+  (pair? '(a))
+  "pairp1")
+
+(aeq nil
+  (pair? 1)
+  "pairp2")
+
+(aeq t
+  (pair? (cons 'a 'b))
+  "pairp3")
+
+
+(= test-vec (vector 1 2 3))
+
+(aeq 1
+  (aref 0 test-vec)
+  "vect and aref1")
+
+(aeq nil
+  (aref 3 test-vec)
+  "vect and aref2")
+
+(aeq 1
+  (unless (eq? 1 2) 1)
+  "unless1")
+
+(aeq nil
+  (unless (eq? 1 1) 
+    1 
+    nil)
+  "unless2")
+
+(aeq 'c
+  (car (assoc 'c '((a b) (c d))))
+  "assoc1")
+
+(aeq 3
+  (car (assoc 3 '((1 2) (3 4))))
+  "assoc2")
+
+(aeq "hoge"
+  (car (assoc "hoge" '(("hoge" "fuga") ("piyo" "piyo"))))
+  "assoc3")
+
+(aeq nil
+  (car (assoc "xxx" '(("hoge" "fuga") ("piyo" "piyo"))))
+  "assoc4")
+
+
+(= x (json-parse "{\"a\": 1, \"b\": {\"z\": [1, 2, 3]}}"))
+(aeq 1.0
+     (cdr (assoc "a" x))
+     "json-parse1")
+
+(= x (json-parse "[{\"a\": 1, \"b\": {\"z\": [1, 2, 3]}}]"))
+(aeq 1.0
+     (cdr (assoc "a" (car x)))
+     "json-parse2")
+
+(aeq 'a
+     (caar '((a b)))
+     "caar1")
+
+(aeq 'b
+     (cadr '(a b))
+     "cadr1")
+
+(aeq 'c
+     (car (cddr '(a b c)))
+     "cddr1")
+
+(aeq 'a
+     (caaar '(((a b))))
+     "caaar1")
+
+(aeq 'c
+     (caadr '(((a b)) (c d)))
+     "caadr1")
+
+(aeq 'b
+     (cadar '((a b)))
+     "cadar1")
+
+
+(aeq 'b
+     (car (cdar '((a b c))))
+     "cdar1")
+
+(aeq 'b
+     (car (cdaar '(((a b c)))))
+     "cdaar1")
+
+(aeq 'c
+     (caddr '(a b c))
+     "caddr1")
+
+(aeq 'c
+     (car (cdadr '(a (b c) d)))
+     "cdadr1")
+
+(aeq 'c
+     (car (cddar '((a b c d))))
+     "cddar1")
+
+(aeq 'd
+     (car (cdddr '(a b c d)))
+     "cdddr1")
+
+(= file (open "test.txt" "w"))
+(write file "text1 text2 text3")
+
+(= file (open "test.txt" "r"))
+(= str (read-file file))
+(aeq "text1 text2 text3"
+  str
+  "file1")
+
+(aeq "text1"
+  (car (split " " str))
+  "split1")
+
+(= test-vec (vector 1 2 3))
+(= test-vec (vector-push test-vec 100))
+(aeq (vector-pop test-vec)
+     100
+     "vec1")
+
+(aeq (vector-len test-vec)
+     3
+     "vector-len1")
+
+(= x '(1 2 3 4))
+(aeq (nth 2 x)
+     3
+     "nth1")
+
+(= y (list 1 2 3 4))
+(aeq 2
+     (car (member 2 y))
+     "list1")
+
+(aeq t
+     (odd? 1)
+     "oddp1")
+
+(aeq nil
+     (odd? 2)
+     "oddp2")
+
+(aeq nil
+     (even? 1)
+     "evenp1")
+
+(aeq t
+     (even? 2)
+     "evenp2")
+
+
+(def add (x)
+  (+ x 1))
+
+(aeq 5 (car (mapcar #'+ (list 1 2 3) (list 4 5 6))) "mapcar1")
+(aeq 2 (car (mapcar #'add (list 1 2 3))) "mapcar2")
+
+(def add (x y z)
+  (+ x y z))
+
+(aeq 12 (car (mapcar #'add (list 1 2 3) (list 4 5 6) (list 7 8 9))) "mapcar3")
+
+(aeq 3 (cadr (mapcar #'(fn (x) (+ x 1)) '(1 2 3 4 5))) "mapcar4")
+
+
+(def add (x y &optional z i)
+  (if (eq? z nil)
+    (+ x y)
+    (+ x y z)))
+
+(aeq 6 (add 1 2 3) "optional1")
+(aeq 3 (add 1 2) "optional2")
+
+(= str "abc")
+(aeq "bbc"
+     (regexp-replace str "a" "b")
+     "replace1")
+
+(aeq t (regexp-match str "a") "match1")
+(aeq nil (regexp-match str "d") "match2")
+
+(aeq "b" (subseq str 1 1) "substring1")
+
+(= vec (vector 1 2 3))
+(aeq 3 (vec 2) "vec access1")
+
+(= x (make-hash))
+(x 'a 1)
+(aeq 2 (+ 1 (x 'a)) "hash1")
+
+(= x (make-hash))
+(x (intern "a") 1)
+(aeq 2 (+ 1 (x 'a)) "hash2")
+(aeq 2 (+ 1 (x (intern "a"))) "hash3")
+(= a "a")
+(aeq 2 (+ 1 (x (intern a))) "hash4")
+
+
+(global x 2)
+
+(def test(x)
+  (global x 1))
+
+(test 1)
+
+(aeq 1 x "global1")
+
+
+(global x 2)
+
+(def test(x)
+  (= x 1))
+
+(test 1)
+
+(aeq 2 x "global2")
+
+(aeq 3
+  (with (x 1 y 2)
+    (+ x y)) 
+  "let bind1")
+
+(aeq "b" 
+     (cadr (str-to-list "abc")) 
+     "str-to-list1")
+
+(def test (x)
+  (with (y (fn (x)
+            (if (eq? x 10000)
+              x
+              (funcall #'y (+ x 1)))))
+    (funcall #'y x)))
+
+(aeq 10000 (test 1) "with1")

@@ -1,0 +1,101 @@
+(load "test/assert.dj")
+
+(aeq
+  21
+  ((fn (x y)
+     (+ x y)) 1 20)
+  "idea2")
+(aeq 105 ((fn () 105)) "idea7")
+
+(= z (fn (x) (+ x 200)))
+(aeq 1200 (funcall #'z 1000) "idea11")
+
+(def test (x) (+ x 10000))
+(= z #'test)
+
+(aeq 10001 (funcall z 1) "idea15")
+
+(def hoge (x)
+  (funcall x 2))
+
+(aeq 10002 (hoge z) "idea20")
+
+(aeq 
+  50002
+  (hoge 
+    #'(fn (x) (+ x 50000)))
+  "idea22")
+
+(aeq "Hello World" 
+     (format "Hello ~a" "World")
+     "format1")
+
+(aeq "Hello 1 2 3"
+     (format "Hello ~d ~d ~d" 1 2 3)
+     "format2")
+
+(aeq "Hello World"
+     (format "Hello World" 1 2 3)
+     "format3")
+
+(aeq "Hello World"
+     (format "Hello World")
+     "format4")
+
+(print (command "ls" "-lha"))
+
+(aeq "a"
+  (cond (eq? 1 1) (print "a") 
+        (eq? 1 2) (print "b") 
+        t (print "c"))
+  "cond1")
+
+(aeq "b"
+  (cond (eq? 1 2) (print "a") 
+        (eq? 1 1) (print "b") 
+        t (print "c"))
+  "cond2")
+
+(aeq "c"
+  (cond (eq? 1 2) (print "a") 
+        (eq? 1 2) (print "b") 
+        t (print "c"))
+  "cond3")
+
+(aeq nil
+  (cond (eq? 1 2) (print "a") 
+        (eq? 1 2) (print "b") 
+        nil (print "c"))
+  "cond4")
+
+(aeq t
+     (atom? 1)
+     "atomp1")
+
+(aeq nil
+     (atom? '(1))
+     "atom2")
+
+(aeq nil
+     (pair? '(1 2))
+     "pair?1")
+
+(aeq t
+     (pair? (cons 1 2))
+     "pairp2")
+
+(aeq t
+     (list? '(1 2))
+     "listp1")
+
+(aeq nil
+     (list? 1)
+     "listp2")
+
+(aeq t
+     (nil? nil)
+     "nilp1")
+
+(aeq nil
+     (nil? 1)
+     "nilp2")

@@ -1,0 +1,34 @@
+# future disco design
+
+# completed design
+- [x] vector-pop 
+- [x] vector-len
+- [x] &optional
+- [x] make-requestにdata足せるように&data symbol引数の追加
+- [x] lambda push normal stack
+- [x] FStackいるかな？ → 削除
+- [x] DefineFunctionをbase.Fからbase.Sにする
+- [x] setf typePropagation
+- [x] let typePropagation -> Symbol, quote
+- [x] alias
+- [x] str-length
+- [x] string-to-list
+- [x] intern
+- [x] make-hash
+- [x] get-hash
+- [x] set-hash
+- [x] (aref vev 1) -> (vec 1)
+- [x] cond と letの（）を減らす
+- [x] cond と letの引数を偶数かチェックする
+- [x] global
+- [x] funcall typePropagation
+- [x] lambda typePropagation
+- [x] lambda checkArgumentCount
+- [x] format lambda typePropagation
+- [x] (format "~a" (funcall #'(lambda (x) x) 1))
+- [x] funcall function type check
+- [x] ld atom type propergation
+- [x] wonder let when if or cond type propergation.
+- [x] set argument types when if or cond type propergation.
+- [x] cond optional append
+- [x] format ~%

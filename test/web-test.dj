@@ -1,0 +1,18 @@
+(defun input-form ()
+  (format "<input name='name' type='text'>"))
+
+(defun index-handler () 
+  (set-status 222)
+  (format "<html><body>~a</body></html>" (input-form)))
+
+(defun test-handler () 
+  (if (eq 1 (random 2))
+    (set-status 200)
+    (set-status 500))
+  (format "my name is ~a" (get-query 'name)))
+
+
+(defserver 'web ":8080")
+(defhandler "/" #'index-handler)
+(defhandler "/test" #'test-handler)
+(run-server 'web)

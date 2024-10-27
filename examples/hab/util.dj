@@ -1,0 +1,3 @@
+(mac aif (test then else)
+ `(with (&it ,test)
+     (if &it ,then ,else)))

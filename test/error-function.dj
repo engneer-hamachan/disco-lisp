@@ -1,0 +1,8 @@
+(defun test2 (x y)
+  (print 1)
+  (print 1)
+  (print 2) 
+  (+ x 1 y 3 4)
+  (print 1)
+  (print 1)
+  (print 1))
