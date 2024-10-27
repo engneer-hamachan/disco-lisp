@@ -7,7 +7,7 @@
 
 ## DISCOの特徴
 ### 型推論
-[Screencast from 2024年10月27日 13時39分43秒.webm](https://github.com/user-attachments/assets/184a6f42-ae68-4b30-9a82-00116b5b9e8e)
+[demo.webm](https://github.com/user-attachments/assets/3e4938c1-a68e-4567-9990-0f27be691053)
 
 
 組み込み関数で型情報を与えて、ひたすら呼び出し元へと伝え続ける「型伝搬法」で型情報を管理して、
