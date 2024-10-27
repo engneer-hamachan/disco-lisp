@@ -55,8 +55,9 @@ vim hello.dj
 ```
 
 ## REPL
+ビルドしてから
 ``` bash
-disco
+./disco
 ```
 とタイプしてEnterを押すとREPLが使えます。
 
