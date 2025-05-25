@@ -372,6 +372,6 @@ DISCOはまだ開発初期段階にあり、以下のような機能追加や改
 ## 参考リンク
 
 - [GitHub リポジトリ](https://github.com/username/disco)
-- [チュートリアル](https://github.com/username/disco/docs/tutorial.md)
+- [チュートリアル](https://github.com/username/disco/tutorial.md)
 - [サンプルコード集](https://github.com/username/disco/examples)
 
