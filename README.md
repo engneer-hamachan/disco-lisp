@@ -371,7 +371,7 @@ DISCOはまだ開発初期段階にあり、以下のような機能追加や改
 
 ## 参考リンク
 
-- [GitHub リポジトリ](https://github.com/username/disco)
-- [チュートリアル](https://github.com/username/disco/tutorial.md)
-- [サンプルコード集](https://github.com/username/disco/examples)
+- [GitHub リポジトリ](https://github.com/enegeneer-hamachan/disco)
+- [チュートリアル](https://github.com/enegeneer-hamachan/disco/tutorial.md)
+- [サンプルコード集](https://github.com/enegeneer-hamachan/disco/examples)
 
