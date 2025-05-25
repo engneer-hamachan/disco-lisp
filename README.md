@@ -66,6 +66,14 @@ vim hello.dj
 一年くらい遊んでバグが出なくなったら、v1を正式リリースしたい
 
 
+
+
+
+
+
+
+
+
 以下、AIにもドキュメントを書いて貰いました！AIが書いたドキュメントの方が優秀ですね（汗）
 
 # DISCO LISP ドキュメント
@@ -368,10 +376,3 @@ DISCOはまだ開発初期段階にあり、以下のような機能追加や改
 - DISCOはまだ実験的な言語であり、API変更や仕様変更が頻繁に行われる可能性があります
 - プロダクション環境での使用は推奨されていません
 - バグ報告や機能提案は歓迎しています
-
-## 参考リンク
-
-- [GitHub リポジトリ](https://github.com/enegeneer-hamachan/disco)
-- [チュートリアル](https://github.com/enegeneer-hamachan/disco/tutorial.md)
-- [サンプルコード集](https://github.com/enegeneer-hamachan/disco/examples)
-
